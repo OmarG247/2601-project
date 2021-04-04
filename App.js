@@ -15,6 +15,8 @@ import { useFonts } from "expo-font";
 import { searchImages } from "./unsplash.service";
 import loadingIcon from "./assets/loading.gif";
 
+const randomDelay = () => Math.floor(Math.random() * 1500 + 500);
+
 const App = () => {
   const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
@@ -28,10 +30,12 @@ const App = () => {
 
   useEffect(() => {
     setLodaing(true);
-    searchImages(currQuery, page).then((res) => {
-      setImages([...images, ...res.results]);
-      setLodaing(false);
-    });
+    setTimeout(() => {
+      searchImages(currQuery, page).then((res) => {
+        setImages([...images, ...res.results]);
+        setLodaing(false);
+      });
+    }, randomDelay());
   }, [page]);
 
   const search = () => {
@@ -43,16 +47,19 @@ const App = () => {
     }
 
     setLodaing(true);
-    setCurrQuery(trimmed);
-    searchImages(trimmed, page).then((res) => {
-      if (res.length === 0) {
-        Alert.alert("no results were found with that query");
-      } else {
-        Keyboard.dismiss();
-      }
-      setImages(res.results);
+    setTimeout(() => {
       setLodaing(false);
-    });
+      setCurrQuery(trimmed);
+      searchImages(trimmed, page).then((res) => {
+        if (res.length === 0) {
+          Alert.alert("no results were found with that query");
+        } else {
+          Keyboard.dismiss();
+        }
+        setImages(res.results);
+        setLodaing(false);
+      });
+    }, randomDelay());
   };
 
   return (
