@@ -7,6 +7,7 @@ export const AppStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
+    paddingBottom: 40,
   },
   topContainer: {
     display: "flex",
@@ -18,7 +19,7 @@ export const AppStyles = StyleSheet.create({
     shadowColor: "black",
     shadowOpacity: 0.25,
     shadowRadius: 12,
-    elevation: 12
+    elevation: 12,
   },
   input: {
     flex: 1,
@@ -54,6 +55,18 @@ export const AppStyles = StyleSheet.create({
   },
   galleryContainer: {
     flex: 1,
-    width: '100%',
-  }
+    width: "100%",
+  },
+  galleryImage: {
+    width: "100%",
+  },
+  moreButton: {
+    width: "100%",
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    backgroundColor: "black",
+    display: "flex",
+    alignItems: "center",
+    borderRadius: 10,
+  },
 });

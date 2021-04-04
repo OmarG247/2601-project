@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   Alert,
   Image,
+  Keyboard,
   ScrollView,
   Text,
   TextInput,
@@ -24,10 +25,6 @@ const App = () => {
   });
 
   useEffect(() => {
-    // console.log(images.map((image) => image.urls.small));
-  }, [images]);
-
-  useEffect(() => {
     searchImages(currQuery, page).then((res) => {
       setImages([...images, ...res.results]);
     });
@@ -45,6 +42,8 @@ const App = () => {
     searchImages(trimmed, page).then((res) => {
       if (res.length === 0) {
         Alert.alert("no results were found with that query");
+      } else {
+        Keyboard.dismiss();
       }
       setImages(res.results);
     });
@@ -92,13 +91,23 @@ const App = () => {
           <ScrollView style={{ flex: 1 }}>
             {images.map((image) => (
               <Image
-                style={{
-                  width: "100%",
-                  aspectRatio: image.width / image.height,
-                }}
-                source={{ uri: image.urls.small }}
+                style={[
+                  AppStyles.galleryImage,
+                  { aspectRatio: image.width / image.height },
+                ]}
+                source={{ uri: image.urls.regular }}
               />
             ))}
+            {images.length > 0 && (
+              <View style={{ width: "100%", padding: 16 }}>
+                <TouchableHighlight
+                  onPress={() => setPage(page + 1)}
+                  style={AppStyles.moreButton}
+                >
+                  <Text style={AppStyles.search}>more</Text>
+                </TouchableHighlight>
+              </View>
+            )}
           </ScrollView>
         </View>
       </View>
