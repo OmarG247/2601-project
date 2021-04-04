@@ -6,6 +6,7 @@ import {
   View,
   Text,
   ScrollView,
+  Linking,
 } from "react-native";
 import { AppStyles } from "./Styles";
 
@@ -21,7 +22,13 @@ const ImageModal = ({ image, handleClose }) => (
           <Text>{image.user.username}</Text>
         </ScrollView>
       </View>
-      <View style={{ padding: 16, width: '100%' }}>
+      <View style={Modal.actions}>
+        <Text
+          onPress={() => Linking.openURL(image.links.html)}
+          style={[AppStyles.buttonText, { color: "black", marginRight: 12 }]}
+        >
+          open in unsplash
+        </Text>
         <TouchableHighlight
           style={AppStyles.button}
           onPress={() => handleClose()}
@@ -55,6 +62,14 @@ const Modal = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     marginTop: 20,
+  },
+  actions: {
+    display: "flex",
+    flexDirection: "row",
+    padding: 16,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "flex-end",
   },
   info: {
     flex: 1,
