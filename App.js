@@ -89,8 +89,9 @@ const App = () => {
         </View>
         <View style={AppStyles.galleryContainer}>
           <ScrollView style={{ flex: 1 }}>
-            {images.map((image) => (
+            {images.map((image, index) => (
               <Image
+                key={`image-${index}`}
                 style={[
                   AppStyles.galleryImage,
                   { aspectRatio: image.width / image.height },
