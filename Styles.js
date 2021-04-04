@@ -9,7 +9,7 @@ export const AppStyles = StyleSheet.create({
     position: "relative",
     paddingTop: 40
   },
-  searchContainer: {
+  topContainer: {
     display: "flex",
     position: "absolute",
     top: 40,
@@ -20,10 +20,16 @@ export const AppStyles = StyleSheet.create({
     backgroundColor: "lightgrey",
   },
   input: {
-    width: "100%",
+    flex: 1,
+    backgroundColor: 'lightblue'
   },
   logo: {
     height: 56,
     width: 64
+  },
+  header: {
+    fontFamily: 'DMSans-Rregular',
+    fontSize: 32,
+    color: 'black'
   }
 });
