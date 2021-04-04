@@ -7,19 +7,18 @@ export const AppStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
-    paddingTop: 40,
   },
   topContainer: {
     display: "flex",
-    position: "absolute",
-    top: 0,
     width: "100%",
     paddingBottom: 16,
     paddingTop: 64,
     paddingHorizontal: 12,
     backgroundColor: "white",
-    borderBottomColor: "rgba(0, 0, 0, 0.25)",
-    borderBottomWidth: 2,
+    shadowColor: "black",
+    shadowOpacity: 0.25,
+    shadowRadius: 12,
+    elevation: 12
   },
   input: {
     flex: 1,
@@ -49,8 +48,11 @@ export const AppStyles = StyleSheet.create({
     marginLeft: 8,
   },
   search: {
-    fontFamily: "DMSans-Regular",
+    fontFamily: "DMSans-Medium",
     fontSize: 16,
     color: "white",
   },
+  galleryContainer: {
+    flex: 1
+  }
 });

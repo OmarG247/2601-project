@@ -5,11 +5,14 @@ import logo from "./assets/logo.png";
 import { useFonts } from "expo-font";
 
 const App = () => {
+  const [images, setImages] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [fontsLoaded] = useFonts({
     "DMSans-Medium": require("./assets/fonts/DMSans-Medium.ttf"),
     "DMSans-Regular": require("./assets/fonts/DMSans-Regular.ttf"),
   });
+
+  const search = () => {};
 
   return (
     fontsLoaded && (
@@ -24,25 +27,31 @@ const App = () => {
             }}
           >
             <Image source={logo} style={AppStyles.logo} />
-            <Text style={[AppStyles.header, { marginLeft: 16 }]}>home</Text>
+            <Text style={[AppStyles.header, { marginLeft: 16 }]}>Images</Text>
           </View>
           <View
             style={{
               display: "flex",
-              flexDirection: 'row'
+              flexDirection: "row",
+              marginTop: 8
             }}
           >
             <TextInput
               placeholder={"🔍 dogs, cats, lego, city"}
               placeholderTextColor={"rgba(0, 0, 0, 0.25)"}
               style={AppStyles.input}
+              onChangeText={(input) => setSearchQuery(input)}
+              value={searchQuery}
             />
-            <TouchableHighlight style={AppStyles.searchButton}>
+            <TouchableHighlight
+              onPress={() => search()}
+              style={AppStyles.searchButton}
+            >
               <Text style={AppStyles.search}>search</Text>
             </TouchableHighlight>
           </View>
         </View>
-        <Text>Open up App.js to start working on your app!</Text>
+        <View style={AppStyles.galleryContainer}></View>
       </View>
     )
   );
