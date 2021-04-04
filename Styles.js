@@ -7,7 +7,6 @@ export const AppStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
-    paddingBottom: 40,
   },
   topContainer: {
     display: "flex",
@@ -56,6 +55,7 @@ export const AppStyles = StyleSheet.create({
   galleryContainer: {
     flex: 1,
     width: "100%",
+    position: 'relative'
   },
   galleryImage: {
     width: "100%",

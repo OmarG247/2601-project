@@ -13,20 +13,24 @@ import { AppStyles } from "./Styles";
 import logo from "./assets/logo.png";
 import { useFonts } from "expo-font";
 import { searchImages } from "./unsplash.service";
+import loadingIcon from "./assets/loading.gif";
 
 const App = () => {
   const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [currQuery, setCurrQuery] = useState("");
+  const [loading, setLodaing] = useState(false);
   const [fontsLoaded] = useFonts({
     "DMSans-Medium": require("./assets/fonts/DMSans-Medium.ttf"),
     "DMSans-Regular": require("./assets/fonts/DMSans-Regular.ttf"),
   });
 
   useEffect(() => {
+    setLodaing(true);
     searchImages(currQuery, page).then((res) => {
       setImages([...images, ...res.results]);
+      setLodaing(false);
     });
   }, [page]);
 
@@ -38,6 +42,7 @@ const App = () => {
       return;
     }
 
+    setLodaing(true);
     setCurrQuery(trimmed);
     searchImages(trimmed, page).then((res) => {
       if (res.length === 0) {
@@ -46,70 +51,100 @@ const App = () => {
         Keyboard.dismiss();
       }
       setImages(res.results);
+      setLodaing(false);
     });
   };
 
   return (
     fontsLoaded && (
-      <View style={AppStyles.parent}>
-        <View style={AppStyles.topContainer}>
+      <>
+        {loading && (
           <View
             style={{
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(0, 0, 0, 0.4)",
               display: "flex",
-              flexDirection: "row",
-              alignItems: "flex-end",
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 4
             }}
           >
-            <Image source={logo} style={AppStyles.logo} />
-            <Text style={[AppStyles.header, { marginLeft: 16 }]}>Images</Text>
-          </View>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              marginTop: 8,
-            }}
-          >
-            <TextInput
-              placeholder={"📸 dogs, cats, lego, city"}
-              placeholderTextColor={"rgba(0, 0, 0, 0.25)"}
-              style={AppStyles.input}
-              onChangeText={(input) => setSearchQuery(input)}
-              value={searchQuery}
+            <Image
+              source={loadingIcon}
+              style={{
+                height: 64,
+                width: 64,
+              }}
             />
-            <TouchableHighlight
-              onPress={() => search()}
-              style={AppStyles.searchButton}
+            <Text style={[AppStyles.search, { marginTop: 12 }]}>loading</Text>
+          </View>
+        )}
+        <View style={AppStyles.parent}>
+          <View style={AppStyles.topContainer}>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "flex-end",
+              }}
             >
-              <Text style={AppStyles.search}>search</Text>
-            </TouchableHighlight>
+              <Image source={logo} style={AppStyles.logo} />
+              <Text style={[AppStyles.header, { marginLeft: 16 }]}>Images</Text>
+            </View>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                marginTop: 8,
+              }}
+            >
+              <TextInput
+                placeholder={"📸 dogs, cats, lego, city"}
+                placeholderTextColor={"rgba(0, 0, 0, 0.25)"}
+                style={AppStyles.input}
+                onChangeText={(input) => setSearchQuery(input)}
+                value={searchQuery}
+              />
+              <TouchableHighlight
+                onPress={() => search()}
+                style={[
+                  AppStyles.searchButton,
+                  { backgroundColor: loading ? "rgba(0, 0, 0, 0.5)" : "black" },
+                ]}
+              >
+                <Text style={AppStyles.search}>search</Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+          <View style={AppStyles.galleryContainer}>
+            <ScrollView style={{ flex: 1 }}>
+              {images.map((image, index) => (
+                <Image
+                  key={`image-${index}`}
+                  style={[
+                    AppStyles.galleryImage,
+                    { aspectRatio: image.width / image.height },
+                  ]}
+                  source={{ uri: image.urls.regular }}
+                />
+              ))}
+              {images.length > 0 && (
+                <View style={{ width: "100%", padding: 16, paddingBottom: 40 }}>
+                  <TouchableHighlight
+                    onPress={() => setPage(page + 1)}
+                    disabled={loading}
+                    style={AppStyles.moreButton}
+                  >
+                    <Text style={AppStyles.search}>more</Text>
+                  </TouchableHighlight>
+                </View>
+              )}
+            </ScrollView>
           </View>
         </View>
-        <View style={AppStyles.galleryContainer}>
-          <ScrollView style={{ flex: 1 }}>
-            {images.map((image, index) => (
-              <Image
-                key={`image-${index}`}
-                style={[
-                  AppStyles.galleryImage,
-                  { aspectRatio: image.width / image.height },
-                ]}
-                source={{ uri: image.urls.regular }}
-              />
-            ))}
-            {images.length > 0 && (
-              <View style={{ width: "100%", padding: 16 }}>
-                <TouchableHighlight
-                  onPress={() => setPage(page + 1)}
-                  style={AppStyles.moreButton}
-                >
-                  <Text style={AppStyles.search}>more</Text>
-                </TouchableHighlight>
-              </View>
-            )}
-          </ScrollView>
-        </View>
-      </View>
+      </>
     )
   );
 };
