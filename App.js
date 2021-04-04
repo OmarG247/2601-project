@@ -7,6 +7,7 @@ import {
   Text,
   TextInput,
   TouchableHighlight,
+  TouchableOpacity,
   View,
 } from "react-native";
 import { AppStyles } from "./Styles";
@@ -14,6 +15,7 @@ import logo from "./assets/logo.png";
 import { useFonts } from "expo-font";
 import { searchImages } from "./unsplash.service";
 import loadingIcon from "./assets/loading.gif";
+import ImageModal from "./ImageModal";
 
 const randomDelay = () => Math.floor(Math.random() * 1500 + 500);
 
@@ -23,6 +25,7 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currQuery, setCurrQuery] = useState("");
   const [loading, setLodaing] = useState(false);
+  const [currImage, setCurrImage] = useState(null);
   const [fontsLoaded] = useFonts({
     "DMSans-Medium": require("./assets/fonts/DMSans-Medium.ttf"),
     "DMSans-Regular": require("./assets/fonts/DMSans-Regular.ttf"),
@@ -65,6 +68,12 @@ const App = () => {
   return (
     fontsLoaded && (
       <>
+        {currImage && (
+          <ImageModal
+            imageData={currImage}
+            handleClose={() => setCurrImage(null)}
+          />
+        )}
         {loading && (
           <View style={AppStyles.loadingContainer}>
             <Image
@@ -74,7 +83,9 @@ const App = () => {
                 width: 64,
               }}
             />
-            <Text style={[AppStyles.search, { marginTop: 12, fontSize: 20 }]}>loading</Text>
+            <Text style={[AppStyles.search, { marginTop: 12, fontSize: 20 }]}>
+              loading
+            </Text>
           </View>
         )}
         <View style={AppStyles.parent}>
@@ -117,14 +128,18 @@ const App = () => {
           <View style={AppStyles.galleryContainer}>
             <ScrollView style={{ flex: 1 }}>
               {images.map((image, index) => (
-                <Image
+                <TouchableOpacity
                   key={`image-${index}`}
-                  style={[
-                    AppStyles.galleryImage,
-                    { aspectRatio: image.width / image.height },
-                  ]}
-                  source={{ uri: image.urls.regular }}
-                />
+                  onPress={() => setCurrImage(image)}
+                >
+                  <Image
+                    style={[
+                      AppStyles.galleryImage,
+                      { aspectRatio: image.width / image.height },
+                    ]}
+                    source={{ uri: image.urls.regular }}
+                  />
+                </TouchableOpacity>
               ))}
               {images.length > 0 && (
                 <View style={{ width: "100%", padding: 16, paddingBottom: 40 }}>
