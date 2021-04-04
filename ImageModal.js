@@ -6,7 +6,7 @@ import {
   View,
   Text,
   ScrollView,
-  Linking,
+  Share,
 } from "react-native";
 import { AppStyles } from "./Styles";
 
@@ -24,7 +24,12 @@ const ImageModal = ({ image, handleClose }) => (
       </View>
       <View style={Modal.actions}>
         <Text
-          onPress={() => Linking.openURL(image.links.html)}
+          onPress={() => {
+            Share.share({
+              message: "Share this image's url",
+              url: image.links.html,
+            });
+          }}
           style={[AppStyles.buttonText, { color: "black", marginRight: 12 }]}
         >
           open in unsplash
