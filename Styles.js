@@ -7,29 +7,37 @@ export const AppStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
-    paddingTop: 40
+    paddingTop: 40,
   },
   topContainer: {
     display: "flex",
     position: "absolute",
-    top: 40,
-    left: 0,
+    top: 0,
     width: "100%",
-    paddingVertical: 8,
+    paddingBottom: 16,
+    paddingTop: 64,
     paddingHorizontal: 12,
-    backgroundColor: "lightgrey",
+    backgroundColor: "white",
+    borderBottomColor: "rgba(0, 0, 0, 0.25)",
+    borderBottomWidth: 2,
   },
   input: {
     flex: 1,
-    backgroundColor: 'lightblue'
+    marginTop: 12,
+    fontFamily: "DMSans-Regular",
+    fontSize: 16,
+    borderRadius: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
   },
   logo: {
     height: 56,
-    width: 64
+    width: 65,
   },
   header: {
-    fontFamily: 'DMSans-Rregular',
+    fontFamily: "DMSans-Regular",
     fontSize: 32,
-    color: 'black'
-  }
+    color: "black",
+  },
 });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Image, Text, TextInput, View } from "react-native";
 import { AppStyles } from "./Styles";
 import logo from "./assets/logo.png";
@@ -11,15 +11,26 @@ const App = () => {
     "DMSans-Regular": require("./assets/fonts/DMSans-Regular.ttf"),
   });
 
-  useEffect(() => {}, []);
-
   return (
     fontsLoaded && (
       <View style={AppStyles.parent}>
         <View style={AppStyles.topContainer}>
-          <Image source={logo} style={AppStyles.logo} />
-          <Text style={AppStyles.header}>home</Text>
-          {/* <TextInput style={AppStyles.input} /> */}
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              flex: 1,
+              alignItems: "flex-end",
+            }}
+          >
+            <Image source={logo} style={AppStyles.logo} />
+            <Text style={[AppStyles.header, { marginLeft: 16 }]}>home</Text>
+          </View>
+          <TextInput
+            placeholder={"dogs, cats, lego, city"}
+            placeholderTextColor={"rgba(0, 0, 0, 0.25)"}
+            style={AppStyles.input}
+          />
         </View>
         <Text>Open up App.js to start working on your app!</Text>
       </View>
