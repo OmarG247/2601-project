@@ -53,6 +53,7 @@ export const AppStyles = StyleSheet.create({
     color: "white",
   },
   galleryContainer: {
-    flex: 1
+    flex: 1,
+    width: '100%',
   }
 });

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   Alert,
   Image,
+  ScrollView,
   Text,
   TextInput,
   TouchableHighlight,
@@ -16,26 +17,40 @@ const App = () => {
   const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+  const [currQuery, setCurrQuery] = useState("");
   const [fontsLoaded] = useFonts({
     "DMSans-Medium": require("./assets/fonts/DMSans-Medium.ttf"),
     "DMSans-Regular": require("./assets/fonts/DMSans-Regular.ttf"),
   });
 
   useEffect(() => {
-    console.log(images);
+    // console.log(images.map((image) => image.urls.small));
   }, [images]);
 
+  useEffect(() => {
+    searchImages(currQuery, page).then((res) => {
+      setImages([...images, ...res.results]);
+    });
+  }, [page]);
+
   const search = () => {
-    if (searchQuery.trim() === "") {
+    const trimmed = searchQuery.trim();
+
+    if (trimmed === "") {
       Alert.alert("search cannot me empty");
       return;
     }
 
-    searchImages(searchQuery, page).then((res) => {
-      Alert.alert("no results were found with that query");
+    setCurrQuery(trimmed);
+    searchImages(trimmed, page).then((res) => {
+      if (res.length === 0) {
+        Alert.alert("no results were found with that query");
+      }
       setImages(res.results);
     });
   };
+
+  const nextPage = () => setPage(++page);
 
   return (
     fontsLoaded && (
@@ -59,7 +74,7 @@ const App = () => {
             }}
           >
             <TextInput
-              placeholder={"🔍 dogs, cats, lego, city"}
+              placeholder={"📸 dogs, cats, lego, city"}
               placeholderTextColor={"rgba(0, 0, 0, 0.25)"}
               style={AppStyles.input}
               onChangeText={(input) => setSearchQuery(input)}
@@ -73,7 +88,19 @@ const App = () => {
             </TouchableHighlight>
           </View>
         </View>
-        <View style={AppStyles.galleryContainer}></View>
+        <View style={AppStyles.galleryContainer}>
+          <ScrollView style={{ flex: 1 }}>
+            {images.map((image) => (
+              <Image
+                style={{
+                  width: "100%",
+                  aspectRatio: image.width / image.height,
+                }}
+                source={{ uri: image.urls.small }}
+              />
+            ))}
+          </ScrollView>
+        </View>
       </View>
     )
   );
