@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, Text, TextInput, View } from "react-native";
+import { Image, Text, TextInput, TouchableHighlight, View } from "react-native";
 import { AppStyles } from "./Styles";
 import logo from "./assets/logo.png";
 import { useFonts } from "expo-font";
@@ -26,11 +26,21 @@ const App = () => {
             <Image source={logo} style={AppStyles.logo} />
             <Text style={[AppStyles.header, { marginLeft: 16 }]}>home</Text>
           </View>
-          <TextInput
-            placeholder={"dogs, cats, lego, city"}
-            placeholderTextColor={"rgba(0, 0, 0, 0.25)"}
-            style={AppStyles.input}
-          />
+          <View
+            style={{
+              display: "flex",
+              flexDirection: 'row'
+            }}
+          >
+            <TextInput
+              placeholder={"🔍 dogs, cats, lego, city"}
+              placeholderTextColor={"rgba(0, 0, 0, 0.25)"}
+              style={AppStyles.input}
+            />
+            <TouchableHighlight style={AppStyles.searchButton}>
+              <Text style={AppStyles.search}>search</Text>
+            </TouchableHighlight>
+          </View>
         </View>
         <Text>Open up App.js to start working on your app!</Text>
       </View>

@@ -40,4 +40,17 @@ export const AppStyles = StyleSheet.create({
     fontSize: 32,
     color: "black",
   },
+  searchButton: {
+    alignSelf: "flex-end",
+    borderRadius: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    backgroundColor: "black",
+    marginLeft: 8,
+  },
+  search: {
+    fontFamily: "DMSans-Regular",
+    fontSize: 16,
+    color: "white",
+  },
 });
