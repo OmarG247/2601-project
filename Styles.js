@@ -55,7 +55,7 @@ export const AppStyles = StyleSheet.create({
   galleryContainer: {
     flex: 1,
     width: "100%",
-    position: 'relative'
+    position: "relative",
   },
   galleryImage: {
     width: "100%",
@@ -68,5 +68,15 @@ export const AppStyles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     borderRadius: 10,
+  },
+  loadingContainer: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 4,
   },
 });
