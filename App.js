@@ -70,7 +70,7 @@ const App = () => {
       <>
         {currImage && (
           <ImageModal
-            imageData={currImage}
+            image={currImage}
             handleClose={() => setCurrImage(null)}
           />
         )}
@@ -83,7 +83,7 @@ const App = () => {
                 width: 64,
               }}
             />
-            <Text style={[AppStyles.search, { marginTop: 12, fontSize: 20 }]}>
+            <Text style={[AppStyles.buttonText, { marginTop: 12, fontSize: 20 }]}>
               loading
             </Text>
           </View>
@@ -117,11 +117,11 @@ const App = () => {
               <TouchableHighlight
                 onPress={() => search()}
                 style={[
-                  AppStyles.searchButton,
+                  AppStyles.button,
                   { backgroundColor: loading ? "rgba(0, 0, 0, 0.5)" : "black" },
                 ]}
               >
-                <Text style={AppStyles.search}>search</Text>
+                <Text style={AppStyles.buttonText}>search</Text>
               </TouchableHighlight>
             </View>
           </View>
@@ -130,6 +130,7 @@ const App = () => {
               {images.map((image, index) => (
                 <TouchableOpacity
                   key={`image-${index}`}
+                  activeOpacity={0.75}
                   onPress={() => setCurrImage(image)}
                 >
                   <Image
@@ -148,7 +149,7 @@ const App = () => {
                     disabled={loading}
                     style={AppStyles.moreButton}
                   >
-                    <Text style={AppStyles.search}>more</Text>
+                    <Text style={AppStyles.buttonText}>more</Text>
                   </TouchableHighlight>
                 </View>
               )}

@@ -39,7 +39,7 @@ export const AppStyles = StyleSheet.create({
     fontSize: 32,
     color: "black",
   },
-  searchButton: {
+  button: {
     alignSelf: "flex-end",
     borderRadius: 10,
     paddingVertical: 8,
@@ -47,7 +47,7 @@ export const AppStyles = StyleSheet.create({
     backgroundColor: "black",
     marginLeft: 8,
   },
-  search: {
+  buttonText: {
     fontFamily: "DMSans-Medium",
     fontSize: 16,
     color: "white",
