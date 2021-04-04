@@ -49,8 +49,6 @@ const App = () => {
     });
   };
 
-  const nextPage = () => setPage(++page);
-
   return (
     fontsLoaded && (
       <View style={AppStyles.parent}>
