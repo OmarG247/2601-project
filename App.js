@@ -74,7 +74,7 @@ const App = () => {
                 width: 64,
               }}
             />
-            <Text style={[AppStyles.search, { marginTop: 12 }]}>loading</Text>
+            <Text style={[AppStyles.search, { marginTop: 12, fontSize: 20 }]}>loading</Text>
           </View>
         )}
         <View style={AppStyles.parent}>
