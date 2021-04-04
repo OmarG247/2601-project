@@ -32,7 +32,7 @@ const ImageModal = ({ image, handleClose }) => (
           }}
           style={[AppStyles.buttonText, { color: "black", marginRight: 12 }]}
         >
-          open in unsplash
+          share
         </Text>
         <TouchableHighlight
           style={AppStyles.button}
