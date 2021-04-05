@@ -45,7 +45,6 @@ export const AppStyles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 12,
     backgroundColor: "black",
-    marginLeft: 8,
   },
   buttonText: {
     fontFamily: "DMSans-Medium",
@@ -62,7 +61,7 @@ export const AppStyles = StyleSheet.create({
   },
   moreButton: {
     width: "100%",
-    paddingVertical: 8,
+    paddingVertical: 12,
     paddingHorizontal: 12,
     backgroundColor: "black",
     display: "flex",
@@ -73,7 +72,7 @@ export const AppStyles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.4)",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

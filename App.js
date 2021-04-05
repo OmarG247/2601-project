@@ -83,7 +83,9 @@ const App = () => {
                 width: 64,
               }}
             />
-            <Text style={[AppStyles.buttonText, { marginTop: 12, fontSize: 20 }]}>
+            <Text
+              style={[AppStyles.buttonText, { marginTop: 12, fontSize: 20 }]}
+            >
               loading
             </Text>
           </View>
@@ -118,7 +120,10 @@ const App = () => {
                 onPress={() => search()}
                 style={[
                   AppStyles.button,
-                  { backgroundColor: loading ? "rgba(0, 0, 0, 0.5)" : "black" },
+                  {
+                    marginLeft: 8,
+                    backgroundColor: loading ? "rgba(0, 0, 0, 0.5)" : "black",
+                  },
                 ]}
               >
                 <Text style={AppStyles.buttonText}>search</Text>

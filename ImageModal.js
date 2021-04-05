@@ -15,10 +15,20 @@ const ImageModal = ({ image, handleClose }) => (
     <View style={Modal.card}>
       <Image
         source={{ uri: image.urls.regular }}
-        style={[Modal.image, { aspectRatio: image.width / image.height }]}
+        style={[
+          Modal.image,
+          {
+            maxHeight: image.height > image.width ? "65%" : "100%",
+            aspectRatio:
+              image.height > image.width
+                ? 0.8
+                : image.width / image.height,
+          },
+        ]}
       />
       <View style={Modal.infoContainer}>
         <ScrollView>
+          <View style={{ height: 12 }} />
           <View style={Modal.labelContainer}>
             <Text style={Modal.label}>taken by</Text>
             <Text style={Modal.info}>
@@ -33,6 +43,30 @@ const ImageModal = ({ image, handleClose }) => (
               })}, ${new Date(image.created_at).getFullYear()}`}
             </Text>
           </View>
+          {image.tags.length > 0 && (
+            <View style={Modal.labelContainer}>
+              <Text style={Modal.label}>tags</Text>
+              <View style={Modal.tagsContainer}>
+                {image.tags.map((tag, index) => (
+                  <View
+                    key={`tag-${index}`}
+                    style={[
+                      AppStyles.button,
+                      {
+                        backgroundColor: "white",
+                        borderColor: "black",
+                        borderWidth: 1,
+                        marginHorizontal: 4,
+                      },
+                    ]}
+                  >
+                    <Text style={Modal.info}>{tag.title}</Text>
+                  </View>
+                ))}
+              </View>
+            </View>
+          )}
+          <View style={{ height: 72 }} />
         </ScrollView>
       </View>
       <View style={Modal.actions}>
@@ -44,12 +78,12 @@ const ImageModal = ({ image, handleClose }) => (
               url: image.links.html,
             });
           }}
-          style={[AppStyles.buttonText, { color: "black", marginRight: 12 }]}
+          style={[AppStyles.buttonText, { color: "white", marginRight: 12 }]}
         >
           share
         </Text>
         <TouchableHighlight
-          style={AppStyles.button}
+          style={[AppStyles.button, { borderWidth: 1, borderColor: "white" }]}
           onPress={() => handleClose()}
         >
           <Text style={AppStyles.buttonText}>done</Text>
@@ -81,6 +115,7 @@ const Modal = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     marginTop: 20,
+    position: "relative",
   },
   actions: {
     display: "flex",
@@ -89,12 +124,15 @@ const Modal = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "flex-end",
+    position: "absolute",
+    backgroundColor: "black",
+    bottom: -1,
   },
   infoContainer: {
     flex: 1,
     width: "100%",
     display: "flex",
-    padding: 12,
+    paddingHorizontal: 12,
   },
   image: {
     width: "100%",
@@ -106,11 +144,18 @@ const Modal = StyleSheet.create({
   },
   label: {
     fontFamily: "DMSans-Medium",
-    fontSize: 12,
+    fontSize: 14,
+    marginBottom: 2,
   },
   info: {
     fontFamily: "DMSans-Regular",
     fontSize: 16,
+  },
+  tagsContainer: {
+    display: "flex",
+    flexDirection: "row",
+    marginTop: 8,
+    marginLeft: -4,
   },
 });
 
