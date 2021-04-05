@@ -17,16 +17,30 @@ const ImageModal = ({ image, handleClose }) => (
         source={{ uri: image.urls.regular }}
         style={[Modal.image, { aspectRatio: image.width / image.height }]}
       />
-      <View style={Modal.info}>
+      <View style={Modal.infoContainer}>
         <ScrollView>
-          <Text>{image.user.username}</Text>
+          <View style={Modal.labelContainer}>
+            <Text style={Modal.label}>taken by</Text>
+            <Text style={Modal.info}>
+              {`${image.user.name} @${image.user.username}`}
+            </Text>
+          </View>
+          <View style={Modal.labelContainer}>
+            <Text style={Modal.label}>uploaded in</Text>
+            <Text style={Modal.info}>
+              {`${new Date(image.created_at).toLocaleString("default", {
+                month: "long",
+              })}, ${new Date(image.created_at).getFullYear()}`}
+            </Text>
+          </View>
         </ScrollView>
       </View>
       <View style={Modal.actions}>
         <Text
           onPress={() => {
             Share.share({
-              message: "Share this image's url",
+              title: "Share this image",
+              message: image.links.html,
               url: image.links.html,
             });
           }}
@@ -76,14 +90,27 @@ const Modal = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-end",
   },
-  info: {
+  infoContainer: {
     flex: 1,
     width: "100%",
     display: "flex",
-    padding: 12
+    padding: 12,
   },
   image: {
     width: "100%",
+  },
+  labelContainer: {
+    width: "100%",
+    display: "flex",
+    marginVertical: 8,
+  },
+  label: {
+    fontFamily: "DMSans-Medium",
+    fontSize: 12,
+  },
+  info: {
+    fontFamily: "DMSans-Regular",
+    fontSize: 16,
   },
 });
 
