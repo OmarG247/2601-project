@@ -71,7 +71,7 @@ const Modal = StyleSheet.create({
   actions: {
     display: "flex",
     flexDirection: "row",
-    padding: 16,
+    padding: 12,
     width: "100%",
     alignItems: "center",
     justifyContent: "flex-end",
@@ -79,6 +79,8 @@ const Modal = StyleSheet.create({
   info: {
     flex: 1,
     width: "100%",
+    display: "flex",
+    padding: 12
   },
   image: {
     width: "100%",
