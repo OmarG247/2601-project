@@ -41,6 +41,10 @@ const App = () => {
     }, randomDelay());
   }, [page]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [currQuery]);
+
   const search = () => {
     const trimmed = searchQuery.trim();
 
@@ -148,15 +152,13 @@ const App = () => {
                 </TouchableOpacity>
               ))}
               {images.length > 0 && (
-                <View style={{ width: "100%", padding: 16, paddingBottom: 40 }}>
-                  <TouchableHighlight
-                    onPress={() => setPage(page + 1)}
-                    disabled={loading}
-                    style={AppStyles.moreButton}
-                  >
-                    <Text style={AppStyles.buttonText}>more</Text>
-                  </TouchableHighlight>
-                </View>
+                <TouchableHighlight
+                  onPress={() => setPage(page + 1)}
+                  disabled={loading}
+                  style={AppStyles.moreButton}
+                >
+                  <Text style={AppStyles.buttonText}>more</Text>
+                </TouchableHighlight>
               )}
             </ScrollView>
           </View>

@@ -21,7 +21,7 @@ const ImageModal = ({ image, handleClose }) => (
             maxHeight: image.height > image.width ? "65%" : "100%",
             aspectRatio:
               image.height > image.width
-                ? 0.8
+                ? 0.75
                 : image.width / image.height,
           },
         ]}
@@ -57,6 +57,7 @@ const ImageModal = ({ image, handleClose }) => (
                         borderColor: "black",
                         borderWidth: 1,
                         marginHorizontal: 4,
+                        marginVertical: 4
                       },
                     ]}
                   >
@@ -66,7 +67,7 @@ const ImageModal = ({ image, handleClose }) => (
               </View>
             </View>
           )}
-          <View style={{ height: 72 }} />
+          <View style={{ height: 112 }} />
         </ScrollView>
       </View>
       <View style={Modal.actions}>
@@ -97,16 +98,17 @@ const Modal = StyleSheet.create({
   container: {
     height: "100%",
     width: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: 'black',
     position: "absolute",
     zIndex: 6,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    paddingTop: 40,
   },
   card: {
-    width: "90%",
-    height: "85%",
+    width: "100%%",
+    flex: 1,
     backgroundColor: "white",
     elevation: 12,
     shadowColor: "black",
@@ -114,13 +116,13 @@ const Modal = StyleSheet.create({
     shadowRadius: 12,
     display: "flex",
     alignItems: "center",
-    marginTop: 20,
     position: "relative",
   },
   actions: {
     display: "flex",
     flexDirection: "row",
     padding: 12,
+    paddingBottom: 60,
     width: "100%",
     alignItems: "center",
     justifyContent: "flex-end",
@@ -154,7 +156,8 @@ const Modal = StyleSheet.create({
   tagsContainer: {
     display: "flex",
     flexDirection: "row",
-    marginTop: 8,
+    flexWrap: 'wrap',
+    marginTop: 4,
     marginLeft: -4,
   },
 });

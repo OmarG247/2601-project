@@ -5,3 +5,5 @@ Omar Garcia Flores 101072514
 ## Background
 
 This assignment is meant to provide a way to explore pictures from the 
+
+
