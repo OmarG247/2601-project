@@ -31,7 +31,7 @@ Loading states should also be implemented to show the user when requests are bei
 9. Two options should be displayed at the bottom of this view, a button to return to the main gallery, as well as a share button to share a link to the original Unsplash page of the image. Thoese options should always be visible to the user no matter the height of the image or the amount of information displayed. This should be taken into account.
 10. The sharing button should use the device's native options to share the image link. This should include sharing it to contacts, recent apps used, as well as opening it in the device's default browser.
 
-## Compilation Instructions
+## Compilation & Installation Instructions
 
 1. Unzip application directoy
 2. Install dependencies with `npm i`
