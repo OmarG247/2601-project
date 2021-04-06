@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Alert,
   Image,
@@ -16,6 +16,7 @@ import { useFonts } from "expo-font";
 import { searchImages } from "./unsplash.service";
 import loadingIcon from "./assets/loading.gif";
 import ImageModal from "./ImageModal";
+import CancelIcon from './assets/cancel.png';
 
 const randomDelay = () => Math.floor(Math.random() * 1500 + 500);
 
@@ -26,6 +27,7 @@ const App = () => {
   const [currQuery, setCurrQuery] = useState("");
   const [loading, setLodaing] = useState(false);
   const [currImage, setCurrImage] = useState(null);
+  const scrollRef = useRef(null);
   const [fontsLoaded] = useFonts({
     "DMSans-Medium": require("./assets/fonts/DMSans-Medium.ttf"),
     "DMSans-Regular": require("./assets/fonts/DMSans-Regular.ttf"),
@@ -43,6 +45,9 @@ const App = () => {
 
   useEffect(() => {
     setPage(1);
+    if (scrollRef.current !== null) {
+      scrollRef.current.scrollTo({ y: 0 });
+    }
   }, [currQuery]);
 
   const search = () => {
@@ -58,7 +63,7 @@ const App = () => {
       setLodaing(false);
       setCurrQuery(trimmed);
       searchImages(trimmed, page).then((res) => {
-        if (res.length === 0) {
+        if (res.results.length === 0) {
           Alert.alert("no results were found with that query");
         } else {
           Keyboard.dismiss();
@@ -119,7 +124,32 @@ const App = () => {
                 style={AppStyles.input}
                 onChangeText={(input) => setSearchQuery(input)}
                 value={searchQuery}
+                onSubmitEditing={() => search()}
+                returnKeyType="search"
+                selectTextOnFocus
               />
+              {searchQuery !== '' && (
+                <TouchableHighlight
+                  onPress={() => {
+                    setSearchQuery("");
+                  }}
+                  style={[
+                    AppStyles.button,
+                    {
+                      marginLeft: 8,
+                      borderRadius: 100,
+                      height: 36,
+                      width: 36,
+                      borderWidth: 1,
+                      borderColor: 'black',
+                      backgroundColor: "white",
+                      color: 'black',
+                    },
+                  ]}
+                >
+                  <Image source={CancelIcon} style={{ height: 16, width: 16 }} />
+                </TouchableHighlight>
+              )}
               <TouchableHighlight
                 onPress={() => search()}
                 style={[
@@ -135,7 +165,7 @@ const App = () => {
             </View>
           </View>
           <View style={AppStyles.galleryContainer}>
-            <ScrollView style={{ flex: 1 }}>
+            <ScrollView ref={scrollRef} style={{ flex: 1 }}>
               {images.map((image, index) => (
                 <TouchableOpacity
                   key={`image-${index}`}

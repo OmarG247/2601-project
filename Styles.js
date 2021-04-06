@@ -21,6 +21,7 @@ export const AppStyles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 12,
     elevation: 12,
+    zIndex: 4,
   },
   input: {
     flex: 1,
@@ -47,6 +48,9 @@ export const AppStyles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 12,
     backgroundColor: "black",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonText: {
     fontFamily: "DMSans-Medium",
@@ -57,6 +61,7 @@ export const AppStyles = StyleSheet.create({
     flex: 1,
     width: "100%",
     position: "relative",
+    backgroundColor: "white",
   },
   galleryImage: {
     width: "100%",
@@ -69,7 +74,6 @@ export const AppStyles = StyleSheet.create({
     backgroundColor: "black",
     display: "flex",
     alignItems: "center",
-    borderRadius: 10,
   },
   loadingContainer: {
     position: "absolute",
