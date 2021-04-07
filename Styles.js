@@ -13,7 +13,7 @@ export const AppStyles = StyleSheet.create({
   topContainer: {
     display: "flex",
     width: "100%",
-    paddingBottom: 16,
+    paddingBottom: 12,
     paddingTop: 24,
     paddingHorizontal: 12,
     backgroundColor: "white",
