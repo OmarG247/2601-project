@@ -7,6 +7,7 @@ import {
   Text,
   ScrollView,
   Share,
+  Platform,
 } from "react-native";
 import { AppStyles } from "./Styles";
 
@@ -21,7 +22,9 @@ const ImageModal = ({ image, handleClose }) => (
             maxHeight: image.height > image.width ? "65%" : "100%",
             aspectRatio:
               image.height > image.width
-                ? 0.75
+                ? Platform.OS === "ios"
+                  ? 0.75
+                  : 0.9
                 : image.width / image.height,
           },
         ]}
@@ -57,7 +60,7 @@ const ImageModal = ({ image, handleClose }) => (
                         borderColor: "black",
                         borderWidth: 1,
                         marginHorizontal: 4,
-                        marginVertical: 4
+                        marginVertical: 4,
                       },
                     ]}
                   >
@@ -98,22 +101,18 @@ const Modal = StyleSheet.create({
   container: {
     height: "100%",
     width: "100%",
-    backgroundColor: 'black',
+    backgroundColor: "black",
     position: "absolute",
     zIndex: 6,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: 40,
+    paddingTop: Platform.OS === "ios" ? 40 : 0,
   },
   card: {
     width: "100%",
     flex: 1,
     backgroundColor: "white",
-    elevation: 12,
-    shadowColor: "black",
-    shadowOpacity: 0.25,
-    shadowRadius: 12,
     display: "flex",
     alignItems: "center",
     position: "relative",
@@ -122,7 +121,7 @@ const Modal = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     padding: 12,
-    paddingBottom: 60,
+    paddingBottom: Platform.OS === "ios" ? 60 : 12,
     width: "100%",
     alignItems: "center",
     justifyContent: "flex-end",
@@ -156,7 +155,7 @@ const Modal = StyleSheet.create({
   tagsContainer: {
     display: "flex",
     flexDirection: "row",
-    flexWrap: 'wrap',
+    flexWrap: "wrap",
     marginTop: 4,
     marginLeft: -4,
   },
