@@ -35,13 +35,15 @@ const App = () => {
   });
 
   useEffect(() => {
-    setLodaing(true);
-    setTimeout(() => {
-      searchImages(currQuery, page).then((res) => {
-        setImages([...images, ...res.results]);
-        setLodaing(false);
-      });
-    }, randomDelay());
+    if (page !== 1) {
+      setLodaing(true);
+      setTimeout(() => {
+        searchImages(currQuery, page).then((res) => {
+          setImages([...images, ...res.results]);
+          setLodaing(false);
+        });
+      }, randomDelay());
+    }
   }, [page]);
 
   useEffect(() => {
