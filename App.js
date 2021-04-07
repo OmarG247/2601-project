@@ -4,6 +4,7 @@ import {
   Image,
   Keyboard,
   ScrollView,
+  StatusBar,
   Text,
   TextInput,
   TouchableHighlight,
@@ -16,7 +17,7 @@ import { useFonts } from "expo-font";
 import { searchImages } from "./unsplash.service";
 import loadingIcon from "./assets/loading.gif";
 import ImageModal from "./ImageModal";
-import CancelIcon from './assets/cancel.png';
+import CancelIcon from "./assets/cancel.png";
 
 const randomDelay = () => Math.floor(Math.random() * 1500 + 500);
 
@@ -77,28 +78,7 @@ const App = () => {
   return (
     fontsLoaded && (
       <>
-        {currImage && (
-          <ImageModal
-            image={currImage}
-            handleClose={() => setCurrImage(null)}
-          />
-        )}
-        {loading && (
-          <View style={AppStyles.loadingContainer}>
-            <Image
-              source={loadingIcon}
-              style={{
-                height: 64,
-                width: 64,
-              }}
-            />
-            <Text
-              style={[AppStyles.buttonText, { marginTop: 12, fontSize: 20 }]}
-            >
-              loading
-            </Text>
-          </View>
-        )}
+        <StatusBar translucent backgroundColor="black" />
         <View style={AppStyles.parent}>
           <View style={AppStyles.topContainer}>
             <View
@@ -115,7 +95,8 @@ const App = () => {
               style={{
                 display: "flex",
                 flexDirection: "row",
-                marginTop: 8,
+                marginTop: 12,
+                alignItems: "center",
               }}
             >
               <TextInput
@@ -128,7 +109,7 @@ const App = () => {
                 returnKeyType="search"
                 selectTextOnFocus
               />
-              {searchQuery !== '' && (
+              {searchQuery !== "" && (
                 <TouchableHighlight
                   onPress={() => {
                     setSearchQuery("");
@@ -141,13 +122,16 @@ const App = () => {
                       height: 36,
                       width: 36,
                       borderWidth: 1,
-                      borderColor: 'black',
+                      borderColor: "black",
                       backgroundColor: "white",
-                      color: 'black',
+                      color: "black",
                     },
                   ]}
                 >
-                  <Image source={CancelIcon} style={{ height: 16, width: 16 }} />
+                  <Image
+                    source={CancelIcon}
+                    style={{ height: 16, width: 16 }}
+                  />
                 </TouchableHighlight>
               )}
               <TouchableHighlight
@@ -193,6 +177,28 @@ const App = () => {
             </ScrollView>
           </View>
         </View>
+        {currImage && (
+          <ImageModal
+            image={currImage}
+            handleClose={() => setCurrImage(null)}
+          />
+        )}
+        {loading && (
+          <View style={AppStyles.loadingContainer}>
+            <Image
+              source={loadingIcon}
+              style={{
+                height: 64,
+                width: 64,
+              }}
+            />
+            <Text
+              style={[AppStyles.buttonText, { marginTop: 12, fontSize: 20 }]}
+            >
+              loading
+            </Text>
+          </View>
+        )}
       </>
     )
   );

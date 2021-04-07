@@ -107,7 +107,7 @@ const Modal = StyleSheet.create({
     paddingTop: 40,
   },
   card: {
-    width: "100%%",
+    width: "100%",
     flex: 1,
     backgroundColor: "white",
     elevation: 12,

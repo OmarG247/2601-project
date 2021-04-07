@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 export const AppStyles = StyleSheet.create({
   parent: {
@@ -8,7 +8,7 @@ export const AppStyles = StyleSheet.create({
     justifyContent: "center",
     position: "relative",
     backgroundColor: "black",
-    paddingTop: 40,
+    paddingTop: Platform.OS === "ios" ? 40 : 20,
   },
   topContainer: {
     display: "flex",
@@ -25,25 +25,23 @@ export const AppStyles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    marginTop: 12,
     fontFamily: "DMSans-Regular",
     fontSize: 16,
     borderRadius: 10,
     paddingHorizontal: 12,
-    paddingVertical: 8,
+    height: "100%",
     backgroundColor: "rgba(0, 0, 0, 0.1)",
   },
   logo: {
-    height: 56,
-    width: 65,
+    height: 46,
+    width: 53,
   },
   header: {
     fontFamily: "DMSans-Regular",
-    fontSize: 32,
+    fontSize: 24,
     color: "black",
   },
   button: {
-    alignSelf: "flex-end",
     borderRadius: 10,
     paddingVertical: 8,
     paddingHorizontal: 12,
@@ -69,7 +67,7 @@ export const AppStyles = StyleSheet.create({
   moreButton: {
     width: "100%",
     paddingTop: 24,
-    paddingBottom: 40,
+    paddingBottom: Platform.OS === "ios" ? 40 : 24,
     paddingHorizontal: 12,
     backgroundColor: "black",
     display: "flex",
