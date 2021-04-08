@@ -28,7 +28,7 @@ Loading states should also be implemented to show the user when requests are bei
    
 4. While the request is processed, some sort of loading state should be implemented which should respectively be `true` when a request is sent, and `false` when a request is completed. This state should be reflected on the UI somehow.
    
-5. The result of the API request should be displayed as a vertical gallery of all the images. These images should be rendered as clickable views that will be opening a details view. However, if the query has no results, an alert should be displayed with a message to notify the user.
+5. The result of the API request should be displayed as a vertical gallery of all the images. These images should be rendered as clickable views that will be opening a details view. Once a new set of images is displayed, the vertical scrolling component should scroll back to the top. However, if the query has no results, an alert should be displayed with a message to notify the user.
    
 6. At the bottom of the image gallery, a "more" button should be displayed in order to allow the user to see more pages of the results. This button should use the Unsplash service and the API endpoint in order to query for the following pages. This should also display the "loading" state of the application.
 
