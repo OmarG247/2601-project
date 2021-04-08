@@ -83,4 +83,14 @@ export const AppStyles = StyleSheet.create({
     justifyContent: "center",
     zIndex: 4,
   },
+  cancelButton: {
+    marginLeft: 8,
+    borderRadius: 100,
+    height: 36,
+    width: 36,
+    borderWidth: 1,
+    borderColor: "black",
+    backgroundColor: "white",
+    color: "black",
+  }
 });

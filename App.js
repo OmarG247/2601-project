@@ -116,19 +116,7 @@ const App = () => {
                   onPress={() => {
                     setSearchQuery("");
                   }}
-                  style={[
-                    AppStyles.button,
-                    {
-                      marginLeft: 8,
-                      borderRadius: 100,
-                      height: 36,
-                      width: 36,
-                      borderWidth: 1,
-                      borderColor: "black",
-                      backgroundColor: "white",
-                      color: "black",
-                    },
-                  ]}
+                  style={[AppStyles.button, AppStyles.cancelButton]}
                 >
                   <Image
                     source={CancelIcon}
