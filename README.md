@@ -1,4 +1,4 @@
-# COMP 2601 Project Assignment
+# COMP 2601 Final Project
 
 Omar Garcia Flores 101072514
 
