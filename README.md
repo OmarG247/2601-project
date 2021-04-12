@@ -1,7 +1,5 @@
 # COMP 2601 Final Project
 
-Omar Garcia Flores 101072514
-
 ## Background
 
 This assignment is meant to provide a way to explore pictures from the [unsplash](https://unsplash.com) web [API](https://unsplash.com/developers).
@@ -10,7 +8,7 @@ The application will be built using mobile [React Native](https://reactnative.de
 
 ## Assignment Requirements
 
-An application will be built that has the ability to perform search queries to the Unsplash api and then render a gallery of photos matching that query. These should include an implementation of pagination.
+An application that has the ability to perform search queries to the Unsplash api and then render a gallery of photos matching that query. These should include an implementation of pagination.
 
 Once an image is selected, another screen must appear displaying the image as well as details about the image including the photographer, date taken, as well as topics regarding the picture.
 
